@@ -1,0 +1,43 @@
+.NewEntryForm label {
+  display: flex;
+  padding: 10px 0;
+  align-items: center;
+}
+
+.NewEntryForm fieldset {
+  border: none;
+}
+
+.NewEntryForm div {
+  flex: 1 0 10%;
+  text-align: right;
+  padding: 10px 0;
+}
+
+.NewEntryForm input {
+  flex: 1 1 55%;
+  margin-left: 5%;
+  padding: 10px 0;
+}
+
+.NewEntryForm button {
+  margin-top: 10px;
+  padding: 10px 30px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 3px 3px 3px #9B9B9B;
+  background-color: #1561E4;
+  font-size: medium;
+  color: white;
+}
+
+.NewEntryForm button:hover {
+  background-color: #467CE0
+}
+
+@media screen and (min-width: 768px) {
+  .NewEntryForm {
+    margin: 0 20%;
+  }
+}

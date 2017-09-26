@@ -1,0 +1,21 @@
+.PastEntriesList table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 3px 3px 3px #9B9B9B;
+  border: 2px solid #E2E1E1;
+}
+
+.PastEntriesList td {
+  border: 1px solid #E2E1E1;
+  padding: 6px;
+}
+
+.PastEntriesList td:first-child {
+  text-align: right;
+}
+
+@media screen and (min-width: 768px) {
+  .PastEntriesList {
+    margin: 0 20%;
+  }
+}
