@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './newEntryForm.css';
 
 export default class NewEntryForm extends Component {
@@ -13,19 +14,24 @@ export default class NewEntryForm extends Component {
           </label>
           <label>
             <div>Kilometers</div>
-            <input type="text" name="kilometers" />
+            <input type="number" name="kilometers" />
           </label>
           <label>
             <div>Liters</div>
-            <input type="text" name="liters" />
+            <input type="number" name="liters" />
           </label>
           <label>
             <div>Towing?</div>
             <input type="checkbox" name="towing" />
           </label>
-          <button type="submit">Submit</button>
+          <button type="button">Submit</button>
+          <button type="button" onClick={this.props.loadSampleData}>Load Sample Data</button>
         </fieldset>
       </form>
     )
+  }
+
+  static propTypes = {
+    loadSampleData: PropTypes.func.isRequired
   }
 }

@@ -32,6 +32,10 @@
   color: white;
 }
 
+.NewEntryForm button + button {
+  margin-left: 10px;
+}
+
 .NewEntryForm button:hover {
   background-color: #467CE0
 }
