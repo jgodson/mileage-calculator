@@ -8,16 +8,32 @@
   border: none;
 }
 
+.NewEntryForm .error {
+  color: #E25959;
+  text-align: center;
+}
+
 .NewEntryForm div {
-  flex: 1 0 10%;
+  flex: 0 0 20%;
   text-align: right;
   padding: 10px 0;
 }
 
-.NewEntryForm input {
-  flex: 1 1 55%;
+.NewEntryForm input, .NewEntryForm select {
+  flex: 1 1 75%;
   margin-left: 5%;
-  padding: 10px 0;
+  border: 1px solid #9B9B9B;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: medium;
+}
+
+.NewEntryForm input.has-error {
+  border: 1px solid #E25959;
+}
+
+.NewEntryForm select {
+  max-width: 100px;
 }
 
 .NewEntryForm button {
@@ -30,14 +46,23 @@
   background-color: #1561E4;
   font-size: medium;
   color: white;
-}
-
-.NewEntryForm button + button {
-  margin-left: 10px;
+  outline: none;
 }
 
 .NewEntryForm button:hover {
   background-color: #467CE0
+}
+
+.NewEntryForm button.destructive {
+  background-color: #E25959;
+}
+
+.NewEntryForm button.destructive:hover {
+  background-color: #F08989;
+}
+
+.NewEntryForm button + button {
+  margin-left: 10px;
 }
 
 @media screen and (min-width: 768px) {

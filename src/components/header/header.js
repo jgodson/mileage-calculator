@@ -5,7 +5,7 @@ export default class Header extends Component {
   render() {
     return (
       <div className="Header">
-        <h2>Welcome to Mileage Tracker</h2>
+        <h2>Mileage Tracker</h2>
       </div>
     )
   }

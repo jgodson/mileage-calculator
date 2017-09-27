@@ -20,12 +20,12 @@
 }
 
 .PastEntriesList .delete {
-  background-color: #CA4848;
+  background-color: #E25959;
   cursor: pointer;
 }
 
 .PastEntriesList .delete:hover {
-  background-color: #F76666;
+  background-color: #F08989;
 }
 
 @media screen and (min-width: 768px) {

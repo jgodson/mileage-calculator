@@ -16,7 +16,7 @@ export default class PastEntriesList extends Component {
   }
 
   calculateMPG(liters, km) {
-    return (liters / km * 100).toFixed(2);
+    return liters / km * 100;
   }
 
   convertDate(GMTDate) {
@@ -46,7 +46,7 @@ export default class PastEntriesList extends Component {
                   <td>{entry.liters}</td>
                   <td>{entry.km}</td>
                   <td>{entry.towing ? 'Yes' : 'No'}</td>
-                  <td>{this.calculateMPG(entry.liters, entry.km)}</td>
+                  <td>{this.calculateMPG(entry.liters, entry.km).toFixed(2)}</td>
                   <td><button onClick={() => this.props.removeEntry(index)} key={index} className="delete" type="button">X</button></td>
                 </tr>
               )
@@ -55,7 +55,7 @@ export default class PastEntriesList extends Component {
         </table>
       )
     } else {
-      result = <div>No entries yet. Please add a new entry</div>;
+      result = <div>No entries yet. Add one!</div>;
     }
       return result;
   }
