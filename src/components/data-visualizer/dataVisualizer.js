@@ -16,6 +16,7 @@ export default class DataVisualizer extends Component {
 
   renderAverages() {
     const allEntries = this.props.entries;
+    const normalEntries = allEntries.filter((entry) => !entry.towing);
     const towingEntries = allEntries.filter((entry) => entry.towing);
 
     const allDetails = {
@@ -26,8 +27,17 @@ export default class DataVisualizer extends Component {
       }, 0) / allEntries.length
     }
 
+    const normalDetails = {
+      type: 'Normal',
+      km: normalEntries.reduce((total, entry) => total += parseInt(entry.km, 10), 0),
+      liters: normalEntries.reduce((total, entry) => total += parseInt(entry.liters, 10), 0),
+      mpg: normalEntries.reduce((total, entry) => {
+        return total += parseFloat(this.calculateMPG(entry.liters, entry.km));
+      }, 0) / normalEntries.length
+    }
+
     const towingDetails = {
-      towing: true,
+      type: 'Towing',
       km: towingEntries.reduce((total, entry) => total += parseInt(entry.km, 10), 0),
       liters: towingEntries.reduce((total, entry) => total += parseInt(entry.liters, 10), 0),
       mpg: towingEntries.reduce((total, entry) => {
@@ -46,7 +56,8 @@ export default class DataVisualizer extends Component {
               <th>Average MPG</th>
             </tr>
             {buildRow(allDetails)}
-            {towingEntries.length > 0 ? buildRow(towingDetails) : false}
+            {normalEntries.length > 0 && buildRow(normalDetails)}
+            {towingEntries.length > 0 && buildRow(towingDetails)}
           </tbody>
         </table>
       </div>
@@ -55,7 +66,7 @@ export default class DataVisualizer extends Component {
     function buildRow(data) {
       return (
         <tr>
-          <td>{data.towing ? 'Towing': 'All'}</td>
+          <td>{data.type ? data.type : 'Combined'}</td>
           <td>{data.km}</td>
           <td>{data.liters}</td>
           <td>{data.mpg.toFixed(2)}</td>
@@ -66,10 +77,11 @@ export default class DataVisualizer extends Component {
   }
 
   render() {
+    const hasEntries = this.props.entries.length > 0;
     return (
       <div className="DataVisualizer">
-        <h4>Totals & Average MPG</h4>
-        {this.props.entries.length > 0 ? this.renderAverages() : ''}
+        {hasEntries && <h4>Totals & Average MPG</h4>}
+        {hasEntries && this.renderAverages()}
       </div>
     )
   }

@@ -19,8 +19,8 @@ export default class PastEntriesList extends Component {
     return liters / km * 100;
   }
 
-  convertDate(GMTDate) {
-    const date = new Date(GMTDate);
+  convertDate(entryDate) {
+    const date = new Date(entryDate);
     return date.toLocaleDateString();
   }
   
@@ -33,8 +33,8 @@ export default class PastEntriesList extends Component {
           <tbody>
             <tr>
               <th>Date</th>
-              <th>Liters</th>
               <th>KM</th>
+              <th>Liters</th>
               <th>Towing</th>
               <th>L/100KM</th>
               <th></th>
@@ -43,8 +43,8 @@ export default class PastEntriesList extends Component {
               return (
                 <tr key={index}>
                   <td>{this.convertDate(entry.date)}</td>
-                  <td>{entry.liters}</td>
                   <td>{entry.km}</td>
+                  <td>{entry.liters}</td>
                   <td>{entry.towing ? 'Yes' : 'No'}</td>
                   <td>{this.calculateMPG(entry.liters, entry.km).toFixed(2)}</td>
                   <td><button onClick={() => this.props.removeEntry(index)} key={index} className="delete" type="button">X</button></td>

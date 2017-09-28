@@ -21,7 +21,7 @@ export default class NewEntryForm extends Component {
     event.preventDefault();
     let currentErrors = [];
     const entry = {
-      date: this.date.value,
+      date: this.date.value.replace('-', '/'),
       km: this.km.value,
       liters: this.liters.value,
       towing: this.towing.value === "true" ? true : false
