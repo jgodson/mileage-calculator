@@ -1,47 +1,45 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './dataVisualizer.css';
+import { calculateMileage, labelNames, convertDistance, convertVolume } from '../../utilities';
 
 export default class DataVisualizer extends Component {
   constructor() {
     super();
 
     this.renderAverages = this.renderAverages.bind(this);
-    this.calculateMPG = this.calculateMPG.bind(this);
-  }
-
-  calculateMPG(liters, km) {
-    return liters / km * 100;
   }
 
   renderAverages() {
     const allEntries = this.props.entries;
     const normalEntries = allEntries.filter((entry) => !entry.towing);
     const towingEntries = allEntries.filter((entry) => entry.towing);
+    const currentUnits = this.props.currentUnits;
+    const labels = labelNames(currentUnits);
 
     const allDetails = {
-      km: allEntries.reduce((total, entry) => total += parseInt(entry.km, 10), 0),
-      liters: allEntries.reduce((total, entry) => total += parseInt(entry.liters, 10), 0),
+      km: allEntries.reduce((total, entry) => total += parseFloat(convertDistance(entry.km, currentUnits)), 0),
+      liters: allEntries.reduce((total, entry) => total += parseFloat(convertVolume(entry.liters, currentUnits)), 0),
       mpg: allEntries.reduce((total, entry) => {
-        return total += parseFloat(this.calculateMPG(entry.liters, entry.km));
+        return total += parseFloat(calculateMileage(entry.liters, entry.km, currentUnits));
       }, 0) / allEntries.length
     }
 
     const normalDetails = {
       type: 'Normal',
-      km: normalEntries.reduce((total, entry) => total += parseInt(entry.km, 10), 0),
-      liters: normalEntries.reduce((total, entry) => total += parseInt(entry.liters, 10), 0),
+      km: normalEntries.reduce((total, entry) => total += parseFloat(convertDistance(entry.km, currentUnits)), 0),
+      liters: normalEntries.reduce((total, entry) => total += parseFloat(convertVolume(entry.liters, currentUnits)), 0),
       mpg: normalEntries.reduce((total, entry) => {
-        return total += parseFloat(this.calculateMPG(entry.liters, entry.km));
+        return total += parseFloat(calculateMileage(entry.liters, entry.km, currentUnits));
       }, 0) / normalEntries.length
     }
 
     const towingDetails = {
       type: 'Towing',
-      km: towingEntries.reduce((total, entry) => total += parseInt(entry.km, 10), 0),
-      liters: towingEntries.reduce((total, entry) => total += parseInt(entry.liters, 10), 0),
+      km: towingEntries.reduce((total, entry) => total += parseFloat(convertDistance(entry.km, currentUnits)), 0),
+      liters: towingEntries.reduce((total, entry) => total += parseFloat(convertVolume(entry.liters, currentUnits)), 0),
       mpg: towingEntries.reduce((total, entry) => {
-        return total += this.calculateMPG(entry.liters, entry.km);
+        return total += calculateMileage(entry.liters, entry.km, currentUnits);
       }, 0) / towingEntries.length
     }
 
@@ -51,9 +49,9 @@ export default class DataVisualizer extends Component {
           <tbody>
             <tr>
               <th>Type</th>
-              <th>Total KM</th>
-              <th>Total Liters</th>
-              <th>Average MPG</th>
+              <th>Total {labels.distance}</th>
+              <th>Total {labels.volume}</th>
+              <th>Average {labels.mileage}</th>
             </tr>
             {buildRow(allDetails)}
             {normalEntries.length > 0 && buildRow(normalDetails)}
@@ -67,8 +65,8 @@ export default class DataVisualizer extends Component {
       return (
         <tr>
           <td>{data.type ? data.type : 'Combined'}</td>
-          <td>{data.km}</td>
-          <td>{data.liters}</td>
+          <td>{data.km.toFixed(2)}</td>
+          <td>{data.liters.toFixed(2)}</td>
           <td>{data.mpg.toFixed(2)}</td>
         </tr>
       )
@@ -80,13 +78,14 @@ export default class DataVisualizer extends Component {
     const hasEntries = this.props.entries.length > 0;
     return (
       <div className="DataVisualizer">
-        {hasEntries && <h4>Totals & Average MPG</h4>}
+        {hasEntries && <h4>Totals & Average Mileage</h4>}
         {hasEntries && this.renderAverages()}
       </div>
     )
   }
 
   static propTypes = {
-    entries: PropTypes.array.isRequired
+    entries: PropTypes.array.isRequired,
+    currentUnits: PropTypes.string.isRequired
   }
 }

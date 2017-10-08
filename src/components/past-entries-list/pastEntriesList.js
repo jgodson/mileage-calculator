@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './pastEntriesList.css';
+import { calculateMileage, labelNames, convertDistance, convertVolume } from '../../utilities';
 
 export default class PastEntriesList extends Component {
   constructor() {
     super();
 
     this.renderEntries = this.renderEntries.bind(this);
-    this.calculateMPG = this.calculateMPG.bind(this);
     this.convertDate = this.convertDate.bind(this);
   }
 
   componentDidUpdate() {
     this.props.syncDatabase();
-  }
-
-  calculateMPG(liters, km) {
-    return liters / km * 100;
   }
 
   convertDate(entryDate) {
@@ -26,6 +22,8 @@ export default class PastEntriesList extends Component {
   
   renderEntries() {
     const entries = this.props.entries;
+    const labels = labelNames(this.props.currentUnits);
+    const currentUnits = this.props.currentUnits;
     let result = null;
     if (entries.length > 0) {
       result = (
@@ -33,21 +31,21 @@ export default class PastEntriesList extends Component {
           <tbody>
             <tr>
               <th>Date</th>
-              <th>KM</th>
-              <th>Liters</th>
+              <th>{labels.distance}</th>
+              <th>{labels.volume}</th>
               <th>Towing</th>
-              <th>L/100KM</th>
+              <th>{labels.mileage}</th>
               <th></th>
             </tr>
             {entries.map((entry, index) => {
               return (
                 <tr key={index}>
                   <td>{this.convertDate(entry.date)}</td>
-                  <td>{entry.km}</td>
-                  <td>{entry.liters}</td>
+                  <td>{convertDistance(entry.km, currentUnits)}</td>
+                  <td>{convertVolume(entry.liters, currentUnits)}</td>
                   <td>{entry.towing ? 'Yes' : 'No'}</td>
-                  <td>{this.calculateMPG(entry.liters, entry.km).toFixed(2)}</td>
-                  <td><button onClick={() => this.props.removeEntry(index)} key={index} className="delete" type="button">X</button></td>
+                  <td>{calculateMileage(entry.liters, entry.km, currentUnits)}</td>
+                  <td><button onClick={() => this.props.removeEntry(index)} className="delete" type="button">X</button></td>
                 </tr>
               )
             })}
@@ -72,6 +70,7 @@ export default class PastEntriesList extends Component {
   static propTypes = {
     removeEntry: PropTypes.func.isRequired,
     syncDatabase: PropTypes.func.isRequired,
-    entries: PropTypes.array.isRequired
+    entries: PropTypes.array.isRequired,
+    currentUnits: PropTypes.string.isRequired
   }
 }

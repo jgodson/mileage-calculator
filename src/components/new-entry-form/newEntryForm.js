@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './newEntryForm.css';
+import { labelNames, convertDistance, convertVolume } from '../../utilities';
 
 export default class NewEntryForm extends Component {
   constructor() {
@@ -20,10 +21,11 @@ export default class NewEntryForm extends Component {
   createEntry(event) {
     event.preventDefault();
     let currentErrors = [];
+    const currentUnits = this.props.currentUnits;
     const entry = {
       date: this.date.value.replace(/-/g, '/'),
-      km: this.km.value,
-      liters: this.liters.value,
+      km: convertDistance(parseFloat(this.km.value), currentUnits, true),
+      liters: convertVolume(parseFloat(this.liters.value), currentUnits, true),
       towing: this.towing.value === "true" ? true : false
     }
 
@@ -76,11 +78,28 @@ export default class NewEntryForm extends Component {
   render() {
     const error = <div className="error">Please fill out all fields and submit again</div>;
     const formErrors = this.state.errors;
+    const currentUnits = this.props.currentUnits;
+    const switchUnitsButton = () => {
+      return (
+        <div className="units-selector">
+          <label>Units
+            <select value={currentUnits} onChange={(event) => this.props.setUnits(event.target.value)}>
+              <option value="metric">Metric</option>
+              <option value="imperial">Imperial</option>
+            </select>
+          </label>
+        </div>
+      )
+    }
+    const labels = labelNames(currentUnits);
 
     return (
-      <form ref={(form) => this.form = form}className="NewEntryForm" onSubmit={(event) => this.createEntry(event)}>
+      <form ref={(form) => this.form = form} className="NewEntryForm" onSubmit={(event) => this.createEntry(event)}>
         <fieldset>
-          <h4>Add a new entry</h4>
+          <div className="form-header">
+            <h4>Add a new entry</h4>
+            {switchUnitsButton()}
+          </div>
           <label>
             <div>Date</div>
             <input
@@ -92,23 +111,29 @@ export default class NewEntryForm extends Component {
             />
           </label>
           <label>
-            <div>Kilometers</div>
+            <div>{labels.distance}</div>
             <input
               className={formErrors.includes("km") ? 'has-error' : ''} 
               id="km" 
-              type="number" 
+              placeholder={`Enter ${labels.distance.toLowerCase()} driven...`}
+              type="number"
+              step="any"
+              min="0"
               onBlur={(event) => this.handleBlur(event)} 
               ref={(input) => this.km = input} 
             />
           </label>
           <label>
-            <div>Liters</div>
+            <div>{labels.volume}</div>
             <input
               className={formErrors.includes("liters") ? 'has-error' : ''} 
-              id="liters" 
-              type="number" 
+              id="liters"
+              placeholder={`Enter ${labels.volume.toLowerCase()} used...`}
+              type="number"
+              step="any"
+              min="0"
               onBlur={(event) => this.handleBlur(event)} 
-              ref={(input) => this.liters = input} 
+              ref={(input) => this.liters = input}
             />
           </label>
           <label>
@@ -118,7 +143,7 @@ export default class NewEntryForm extends Component {
               <option value="true">Yes</option>
             </select>
           </label>
-          {this.state.submitError ? error : ''}
+          {this.state.submitError && error}
           <button className="destructive" type="button" onClick={this.clearForm}>Clear Form</button>
           <button type="submit">Submit</button>
         </fieldset>
@@ -127,6 +152,8 @@ export default class NewEntryForm extends Component {
   }
 
   static propTypes = {
-    addEntry: PropTypes.func.isRequired
+    addEntry: PropTypes.func.isRequired,
+    setUnits: PropTypes.func.isRequired,
+    currentUnits: PropTypes.string.isRequired
   }
 }

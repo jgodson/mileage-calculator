@@ -4,6 +4,18 @@
   align-items: center;
 }
 
+.NewEntryForm .form-header {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.NewEntryForm .units-selector {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
 .NewEntryForm fieldset {
   border: none;
 }
@@ -33,7 +45,7 @@
 }
 
 .NewEntryForm select {
-  max-width: 100px;
+  max-width: 110px;
 }
 
 .NewEntryForm button {

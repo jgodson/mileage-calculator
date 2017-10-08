@@ -13,10 +13,13 @@ export default class App extends Component {
     this.addEntry = this.addEntry.bind(this);
     this.syncDatabase = this.syncDatabase.bind(this);
     this.retriveEntries = this.retriveEntries.bind(this);
+    this.getUnits = this.getUnits.bind(this);
+    this.setUnits = this.setUnits.bind(this);
   }
 
   state = {
-    entries: this.retriveEntries() || []
+    entries: this.retriveEntries() || [],
+    units: this.getUnits() || "metric"
   }
 
   syncDatabase() {
@@ -25,6 +28,15 @@ export default class App extends Component {
 
   retriveEntries() {
     return JSON.parse(localStorage.getItem('entries'));
+  }
+
+  getUnits() {
+    return localStorage.getItem('units');
+  }
+
+  setUnits(newUnits) {
+    localStorage.setItem('units', newUnits);
+    this.setState({units: newUnits});
   }
 
   removeEntry(index) {
@@ -43,9 +55,14 @@ export default class App extends Component {
     return (
       <div className="App">
         <Header />
-        <NewEntryForm addEntry={this.addEntry} loadSampleData={this.loadSampleData} />
-        <PastEntriesList syncDatabase={this.syncDatabase} entries={this.state.entries} removeEntry={this.removeEntry}/>
-        <DataVisualizer entries={this.state.entries} />
+        <NewEntryForm addEntry={this.addEntry} setUnits={this.setUnits} currentUnits={this.state.units} />
+        <PastEntriesList 
+          syncDatabase={this.syncDatabase}
+          entries={this.state.entries}
+          removeEntry={this.removeEntry}
+          currentUnits={this.state.units}
+        />
+        <DataVisualizer entries={this.state.entries} currentUnits={this.state.units}/>
       </div>
     );
   }
