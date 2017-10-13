@@ -54,4 +54,8 @@ function convertDistance(km, units, invert = false) {
   return distance.toFixed(2);
 }
 
-export {calculateMileage, labelNames, convertVolume, convertDistance};
+function getImagePath(name) {
+  return `/images/${name}.png`;
+}
+
+export {calculateMileage, labelNames, convertVolume, convertDistance, getImagePath};

@@ -1,0 +1,52 @@
+.Navbar {
+  flex: 0 0 60px;
+  background: #222;
+  color: white;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+.Navbar a {
+  display: block;
+  margin: auto;
+  cursor: pointer;
+}
+
+.Navbar a:hover {
+  background: #313131;
+}
+
+.Navbar .text {
+  display: none;
+}
+
+.Navbar .icon {
+  max-width: 40px;
+  margin: 0 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .Navbar {
+    flex: 1 1 30%;
+    max-width: 250px;
+    padding: 71px 0;
+    display: block;
+  }
+
+  .Navbar a {
+    display: block;
+    padding: 20px;
+  }
+
+  .Navbar .icon {
+    position: relative;
+    top: 4px;
+    max-width: 20px;
+    margin: 0 10px 0 0;
+  }
+
+  .Navbar .text {
+    display: inline-block;
+  }
+}

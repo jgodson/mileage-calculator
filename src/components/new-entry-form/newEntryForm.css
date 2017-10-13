@@ -76,9 +76,3 @@
 .NewEntryForm button + button {
   margin-left: 10px;
 }
-
-@media screen and (min-width: 768px) {
-  .NewEntryForm {
-    margin: 0 20%;
-  }
-}
