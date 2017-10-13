@@ -11,10 +11,6 @@ export default class PastEntriesList extends Component {
     this.convertDate = this.convertDate.bind(this);
   }
 
-  componentDidUpdate() {
-    this.props.syncDatabase();
-  }
-
   convertDate(entryDate) {
     const date = new Date(entryDate);
     return date.toLocaleDateString();

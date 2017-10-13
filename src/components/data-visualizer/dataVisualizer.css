@@ -9,9 +9,3 @@
   border: 1px solid #E2E1E1;
   padding: 6px;
 }
-
-@media screen and (min-width: 768px) {
-  .DataVisualizer {
-    margin: 0 20%;
-  }
-}

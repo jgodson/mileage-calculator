@@ -39,7 +39,7 @@ export default class DataVisualizer extends Component {
       km: towingEntries.reduce((total, entry) => total += parseFloat(convertDistance(entry.km, currentUnits)), 0),
       liters: towingEntries.reduce((total, entry) => total += parseFloat(convertVolume(entry.liters, currentUnits)), 0),
       mpg: towingEntries.reduce((total, entry) => {
-        return total += calculateMileage(entry.liters, entry.km, currentUnits);
+        return total += parseFloat(calculateMileage(entry.liters, entry.km, currentUnits));
       }, 0) / towingEntries.length
     }
 
@@ -53,7 +53,7 @@ export default class DataVisualizer extends Component {
               <th>Total {labels.volume}</th>
               <th>Average {labels.mileage}</th>
             </tr>
-            {buildRow(allDetails)}
+            {normalEntries.length > 0 && towingEntries.length > 0 && buildRow(allDetails)}
             {normalEntries.length > 0 && buildRow(normalDetails)}
             {towingEntries.length > 0 && buildRow(towingDetails)}
           </tbody>

@@ -27,9 +27,3 @@
 .PastEntriesList .delete:hover {
   background-color: #F08989;
 }
-
-@media screen and (min-width: 768px) {
-  .PastEntriesList {
-    margin: 0 20%;
-  }
-}

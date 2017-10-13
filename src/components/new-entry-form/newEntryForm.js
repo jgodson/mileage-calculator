@@ -37,9 +37,7 @@ export default class NewEntryForm extends Component {
 
     if (currentErrors.length === 0) {
       this.props.addEntry(entry);
-      if (this.state.submitError) {
-        this.setState({submitError: false});
-      }
+      this.clearForm();
     } else {
       this.setState({
         errors: currentErrors,
