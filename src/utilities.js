@@ -55,7 +55,7 @@ function convertDistance(km, units, invert = false) {
 }
 
 function getImagePath(name) {
-  return `/images/${name}.png`;
+  return `./images/${name}.png`;
 }
 
 export {calculateMileage, labelNames, convertVolume, convertDistance, getImagePath};
