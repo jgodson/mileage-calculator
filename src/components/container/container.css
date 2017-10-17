@@ -1,6 +1,7 @@
 .Container {
   flex: 1 1 100%;
   flex-direction: row;
+  overflow: auto;
 }
 
 @media screen and (min-width: 768px) {
