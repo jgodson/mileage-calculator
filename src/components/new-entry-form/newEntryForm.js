@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './newEntryForm.css';
 import { labelNames, convertDistance, convertVolume } from '../../utilities';
+import LastEntry from './lastEntry/lastEntry';
 
 export default class NewEntryForm extends Component {
   constructor() {
@@ -92,66 +93,70 @@ export default class NewEntryForm extends Component {
     const labels = labelNames(currentUnits);
 
     return (
-      <form ref={(form) => this.form = form} className="NewEntryForm" onSubmit={(event) => this.createEntry(event)}>
-        <fieldset>
-          <div className="form-header">
-            <h4>Add a new entry</h4>
-            {switchUnitsButton()}
-          </div>
-          <label>
-            <div>Date</div>
-            <input
-              className={formErrors.includes("date") ? 'has-error' : ''}
-              id="date"
-              type="date"
-              onBlur={(event) => this.handleBlur(event)}
-              ref={(input) => this.date = input} 
-            />
-          </label>
-          <label>
-            <div>{labels.distance}</div>
-            <input
-              className={formErrors.includes("km") ? 'has-error' : ''} 
-              id="km" 
-              placeholder={`Enter ${labels.distance.toLowerCase()} driven...`}
-              type="number"
-              step="any"
-              min="0"
-              onBlur={(event) => this.handleBlur(event)} 
-              ref={(input) => this.km = input} 
-            />
-          </label>
-          <label>
-            <div>{labels.volume}</div>
-            <input
-              className={formErrors.includes("liters") ? 'has-error' : ''} 
-              id="liters"
-              placeholder={`Enter ${labels.volume.toLowerCase()} used...`}
-              type="number"
-              step="any"
-              min="0"
-              onBlur={(event) => this.handleBlur(event)} 
-              ref={(input) => this.liters = input}
-            />
-          </label>
-          <label>
-            <div>Towing?</div>
-            <select ref={(input) => this.towing = input}>
-              <option value="false">No</option>
-              <option value="true">Yes</option>
-            </select>
-          </label>
-          {this.state.submitError && error}
-          <button className="destructive" type="button" onClick={this.clearForm}>Clear Form</button>
-          <button type="submit">Submit</button>
-        </fieldset>
-      </form>
+      <div>
+        <form ref={(form) => this.form = form} className="NewEntryForm" onSubmit={(event) => this.createEntry(event)}>
+          <fieldset>
+            <div className="form-header">
+              <h4>Add a new entry</h4>
+              {switchUnitsButton()}
+            </div>
+            <label>
+              <div>Date</div>
+              <input
+                className={formErrors.includes("date") ? 'has-error' : ''}
+                id="date"
+                type="date"
+                onBlur={(event) => this.handleBlur(event)}
+                ref={(input) => this.date = input} 
+              />
+            </label>
+            <label>
+              <div>{labels.distance}</div>
+              <input
+                className={formErrors.includes("km") ? 'has-error' : ''} 
+                id="km" 
+                placeholder={`Enter ${labels.distance.toLowerCase()} driven...`}
+                type="number"
+                step="any"
+                min="0"
+                onBlur={(event) => this.handleBlur(event)} 
+                ref={(input) => this.km = input} 
+              />
+            </label>
+            <label>
+              <div>{labels.volume}</div>
+              <input
+                className={formErrors.includes("liters") ? 'has-error' : ''} 
+                id="liters"
+                placeholder={`Enter ${labels.volume.toLowerCase()} used...`}
+                type="number"
+                step="any"
+                min="0"
+                onBlur={(event) => this.handleBlur(event)} 
+                ref={(input) => this.liters = input}
+              />
+            </label>
+            <label>
+              <div>Towing?</div>
+              <select ref={(input) => this.towing = input}>
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+              </select>
+            </label>
+            {this.state.submitError && error}
+            <button className="destructive" type="button" onClick={this.clearForm}>Clear Form</button>
+            <button type="submit">Submit</button>
+          </fieldset>
+        </form>
+        <LastEntry entries={this.props.entries} currentUnits={this.props.currentUnits} />
+      </div>
     )
   }
 
   static propTypes = {
     addEntry: PropTypes.func.isRequired,
     setUnits: PropTypes.func.isRequired,
-    currentUnits: PropTypes.string.isRequired
+    currentUnits: PropTypes.string.isRequired,
+    entries: PropTypes.array.isRequired
   }
 }

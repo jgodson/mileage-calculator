@@ -78,8 +78,13 @@ export default class DataVisualizer extends Component {
     const hasEntries = this.props.entries.length > 0;
     return (
       <div className="DataVisualizer">
-        {hasEntries && <h4>Totals & Average Mileage</h4>}
-        {hasEntries && this.renderAverages()}
+        <h4>Totals & Average Mileage</h4>
+        {hasEntries 
+          ? 
+            this.renderAverages()
+          :
+            <div>No entries yet. Add one!</div>
+        }
       </div>
     )
   }

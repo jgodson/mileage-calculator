@@ -58,4 +58,9 @@ function getImagePath(name) {
   return `./images/${name}.png`;
 }
 
-export {calculateMileage, labelNames, convertVolume, convertDistance, getImagePath};
+function convertDate(entryDate) {
+  const date = new Date(entryDate);
+  return date.toLocaleDateString();
+}
+
+export {calculateMileage, labelNames, convertVolume, convertDistance, getImagePath, convertDate};

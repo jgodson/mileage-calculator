@@ -85,7 +85,7 @@ export default class App extends Component {
   renderContent(page) {
     switch (page) {
       case 'newEntry':
-        return <NewEntryForm addEntry={this.addEntry} setUnits={this.setUnits} currentUnits={this.state.units} />;
+        return <NewEntryForm addEntry={this.addEntry} setUnits={this.setUnits} currentUnits={this.state.units} entries={this.state.entries} />;
       case 'pastEntries':
         return (
           <PastEntriesList 

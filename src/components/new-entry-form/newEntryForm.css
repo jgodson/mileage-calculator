@@ -1,3 +1,8 @@
+.NewEntryForm {
+  width: 100%;
+  margin: auto;
+}
+
 .NewEntryForm label {
   display: flex;
   padding: 10px 0;
@@ -10,9 +15,11 @@
   flex-wrap: wrap;
 }
 
+.NewEntryForm .form-header h4 {
+  align-self: center;
+}
+
 .NewEntryForm .units-selector {
-  display: flex;
-  align-items: center;
   margin-left: 20px;
 }
 
@@ -75,4 +82,16 @@
 
 .NewEntryForm button + button {
   margin-left: 10px;
+}
+
+@media screen and (min-width: 500px) {
+  .NewEntryForm {
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .NewEntryForm {
+    width: 60%;
+  }
 }

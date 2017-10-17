@@ -1,0 +1,28 @@
+.LastEntry {
+  width: 90%;
+  margin: auto auto 10px auto;
+  max-width: 350px;
+}
+
+.LastEntry table {
+  width: 100%;
+  border: 1px solid #E2E1E1;
+  box-shadow: 3px 3px 3px #9B9B9B;
+  border-radius: 6px;
+}
+
+.LastEntry td {
+  text-align: right;
+  border: 1px solid #E2E1E1;
+  padding: 5px;
+}
+
+.LastEntry td:first-child {
+  width: 40%;
+}
+
+@media screen and (min-width: 500px) {
+  .LastEntry {
+    width: 60%;
+  }
+}

@@ -1,5 +1,6 @@
 .PastEntriesList table {
-  width: 100%;
+  width: 90%;
+  margin: auto;
   border-collapse: collapse;
   box-shadow: 3px 3px 3px #9B9B9B;
   border: 2px solid #E2E1E1;

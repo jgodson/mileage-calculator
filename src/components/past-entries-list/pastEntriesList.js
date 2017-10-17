@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './pastEntriesList.css';
-import { calculateMileage, labelNames, convertDistance, convertVolume } from '../../utilities';
+import { calculateMileage, labelNames, convertDistance, convertVolume, convertDate } from '../../utilities';
 
 export default class PastEntriesList extends Component {
   constructor() {
     super();
 
     this.renderEntries = this.renderEntries.bind(this);
-    this.convertDate = this.convertDate.bind(this);
-  }
-
-  convertDate(entryDate) {
-    const date = new Date(entryDate);
-    return date.toLocaleDateString();
   }
   
   renderEntries() {
@@ -36,7 +30,7 @@ export default class PastEntriesList extends Component {
             {entries.map((entry, index) => {
               return (
                 <tr key={index}>
-                  <td>{this.convertDate(entry.date)}</td>
+                  <td>{convertDate(entry.date)}</td>
                   <td>{convertDistance(entry.km, currentUnits)}</td>
                   <td>{convertVolume(entry.liters, currentUnits)}</td>
                   <td>{entry.towing ? 'Yes' : 'No'}</td>
