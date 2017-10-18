@@ -4,6 +4,7 @@
   "homepage": "https://jgodson.github.io/mileage-calculator/",
   "private": true,
   "dependencies": {
+    "highcharts": "^6.0.1",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
