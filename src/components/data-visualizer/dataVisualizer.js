@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './dataVisualizer.css';
 import { calculateMileage, labelNames, convertDistance, convertVolume } from '../../utilities';
+import LineChart from './lineChart/lineChart';
 
 export default class DataVisualizer extends Component {
   constructor() {
@@ -75,16 +76,17 @@ export default class DataVisualizer extends Component {
   }
 
   render() {
-    const hasEntries = this.props.entries.length > 0;
+    const numEntries = this.props.entries.length;
     return (
       <div className="DataVisualizer">
         <h4>Totals & Average Mileage</h4>
-        {hasEntries 
+        {numEntries > 0 
           ? 
             this.renderAverages()
           :
             <div>No entries yet. Add one!</div>
         }
+        {numEntries > 1 && <LineChart entries={this.props.entries} currentUnits={this.props.currentUnits} />}
       </div>
     )
   }
