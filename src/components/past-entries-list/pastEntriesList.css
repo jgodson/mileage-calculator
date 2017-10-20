@@ -9,6 +9,7 @@
 .PastEntriesList td {
   border: 1px solid #E2E1E1;
   padding: 6px;
+  width: calc(100% / 5);
 }
 
 .PastEntriesList td:last-of-type {
