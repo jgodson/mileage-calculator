@@ -55,7 +55,7 @@ export default class NewEntryForm extends Component {
     const value = event.target.value;
     const id = event.target.id;
     const isEmpty = this.isEmpty(value);
-    if (!isEmpty && this.state.errors.includes(id)) {
+    if (!isEmpty && this.state.errors.indexOf(id) > -1) {
       const errors = [...this.state.errors];
       errors.splice(errors.indexOf(id), 1);
       this.setState({errors});
@@ -103,7 +103,7 @@ export default class NewEntryForm extends Component {
             <label>
               <div>Date</div>
               <input
-                className={formErrors.includes("date") ? 'has-error' : ''}
+                className={formErrors.indexOf("date") > -1 ? 'has-error' : ''}
                 id="date"
                 type="date"
                 onBlur={(event) => this.handleBlur(event)}
@@ -113,7 +113,7 @@ export default class NewEntryForm extends Component {
             <label>
               <div>{labels.distance}</div>
               <input
-                className={formErrors.includes("km") ? 'has-error' : ''} 
+                className={formErrors.indexOf("km") > -1 ? 'has-error' : ''} 
                 id="km" 
                 placeholder={`Enter ${labels.distance.toLowerCase()} driven...`}
                 type="number"
@@ -126,7 +126,7 @@ export default class NewEntryForm extends Component {
             <label>
               <div>{labels.volume}</div>
               <input
-                className={formErrors.includes("liters") ? 'has-error' : ''} 
+                className={formErrors.indexOf("liters") > -1 ? 'has-error' : ''} 
                 id="liters"
                 placeholder={`Enter ${labels.volume.toLowerCase()} used...`}
                 type="number"
