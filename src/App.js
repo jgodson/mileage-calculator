@@ -142,7 +142,7 @@ export default class App extends Component {
   }
 
   changePage = (newPage) => {
-    window.history.pushState({}, newPage, `/${newPage}`);
+    window.history.pushState({}, newPage, `/mileage-calculator/${newPage}`);
     this.setState({currentPage: newPage});
   }
 
