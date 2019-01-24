@@ -27,7 +27,8 @@ export default class NewEntryForm extends Component {
       date: this.date.value.replace(/-/g, '/'),
       km: convertDistance(parseFloat(this.km.value), currentUnits, true),
       liters: convertVolume(parseFloat(this.liters.value), currentUnits, true),
-      towing: this.towing.value === "true" ? true : false
+      towing: this.towing.value === "true" ? true : false,
+      vehicleId: this.props.currentVehicle.id,
     }
 
     Object.keys(entry).forEach((key) => {
@@ -97,7 +98,7 @@ export default class NewEntryForm extends Component {
         <form ref={(form) => this.form = form} className="NewEntryForm" onSubmit={(event) => this.createEntry(event)}>
           <fieldset>
             <div className="form-header">
-              <h4>Add a new entry</h4>
+              <h4>Add entry for {this.props.currentVehicle.name}</h4>
               {switchUnitsButton()}
             </div>
             <label>
@@ -107,32 +108,32 @@ export default class NewEntryForm extends Component {
                 id="date"
                 type="date"
                 onBlur={(event) => this.handleBlur(event)}
-                ref={(input) => this.date = input} 
+                ref={(input) => this.date = input}
               />
             </label>
             <label>
               <div>{labels.distance}</div>
               <input
-                className={formErrors.indexOf("km") > -1 ? 'has-error' : ''} 
-                id="km" 
+                className={formErrors.indexOf("km") > -1 ? 'has-error' : ''}
+                id="km"
                 placeholder={`Enter ${labels.distance.toLowerCase()} driven...`}
                 type="number"
                 step="any"
                 min="0"
-                onBlur={(event) => this.handleBlur(event)} 
-                ref={(input) => this.km = input} 
+                onBlur={(event) => this.handleBlur(event)}
+                ref={(input) => this.km = input}
               />
             </label>
             <label>
               <div>{labels.volume}</div>
               <input
-                className={formErrors.indexOf("liters") > -1 ? 'has-error' : ''} 
+                className={formErrors.indexOf("liters") > -1 ? 'has-error' : ''}
                 id="liters"
                 placeholder={`Enter ${labels.volume.toLowerCase()} used...`}
                 type="number"
                 step="any"
                 min="0"
-                onBlur={(event) => this.handleBlur(event)} 
+                onBlur={(event) => this.handleBlur(event)}
                 ref={(input) => this.liters = input}
               />
             </label>
@@ -157,6 +158,7 @@ export default class NewEntryForm extends Component {
     addEntry: PropTypes.func.isRequired,
     setUnits: PropTypes.func.isRequired,
     currentUnits: PropTypes.string.isRequired,
-    entries: PropTypes.array.isRequired
+    entries: PropTypes.array.isRequired,
+    currentVehicle: PropTypes.object.isRequired
   }
 }

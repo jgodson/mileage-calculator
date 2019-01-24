@@ -1,0 +1,44 @@
+.VehicleCard {
+  display: flex;
+  padding: 0 1rem;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  background-color: lightsteelblue;
+  color: #272e52;
+  box-shadow: grey 3px 5px 3px;
+}
+
+.VehicleCard + .VehicleCard {
+  margin-top: 1rem;
+}
+
+.VehicleCard .icon {
+  width: 128px;
+  height: 128px;
+  padding-right: 1rem;
+}
+
+.VehicleCard .small-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.VehicleCard .name {
+  text-align: center;
+  flex-basis: 60%;
+}
+
+.VehicleCard .name button {
+  padding: 0.4rem;
+  display: block;
+  margin: auto;
+}
+
+.VehicleCard .name button + button {
+  margin-top: 0.4rem;
+}
+
+.VehicleCard h5 {
+  border-bottom: 1px dashed black;
+}

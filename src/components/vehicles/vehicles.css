@@ -1,0 +1,15 @@
+.Vehicles {
+  padding: 0 1rem;
+  max-width: 400px;
+  margin: auto;
+}
+
+.Vehicles .add {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid grey;
+  border-radius: 1.5rem;
+  color: black;
+  background-color: #92d88b;
+  font-size: 1rem;
+}

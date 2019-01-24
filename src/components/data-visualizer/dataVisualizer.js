@@ -79,12 +79,12 @@ export default class DataVisualizer extends Component {
     const numEntries = this.props.entries.length;
     return (
       <div className="DataVisualizer">
-        <h4>Totals & Average Mileage</h4>
-        {numEntries > 0 
-          ? 
+        <h4>Totals & Average Mileage for {this.props.vehicle.name}</h4>
+        {numEntries > 0
+          ?
             this.renderAverages()
           :
-            <div>No entries yet. Add one!</div>
+            <div>No entries yet for this vehicle. Add one!</div>
         }
         {numEntries > 1 && <LineChart entries={this.props.entries} currentUnits={this.props.currentUnits} />}
       </div>
@@ -92,6 +92,7 @@ export default class DataVisualizer extends Component {
   }
 
   static propTypes = {
+    vehicle: PropTypes.object.isRequired,
     entries: PropTypes.array.isRequired,
     currentUnits: PropTypes.string.isRequired
   }

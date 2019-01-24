@@ -4,13 +4,7 @@ import './pastEntriesList.css';
 import { calculateMileage, labelNames, convertDistance, convertVolume, convertDate } from '../../utilities';
 
 export default class PastEntriesList extends Component {
-  constructor() {
-    super();
-
-    this.renderEntries = this.renderEntries.bind(this);
-  }
-  
-  renderEntries() {
+  renderEntries = () => {
     const entries = this.props.entries;
     const labels = labelNames(this.props.currentUnits);
     const currentUnits = this.props.currentUnits;
@@ -43,7 +37,7 @@ export default class PastEntriesList extends Component {
         </table>
       )
     } else {
-      result = <div>No entries yet. Add one!</div>;
+      result = <div>No entries yet for this vehicle. Add one!</div>;
     }
       return result;
   }
@@ -51,13 +45,14 @@ export default class PastEntriesList extends Component {
   render() {
     return (
       <div className="PastEntriesList">
-        <h4>Previous Entries</h4>
+        <h4>Previous Entries for {this.props.vehicle.name}</h4>
         {this.renderEntries()}
       </div>
     )
   }
 
   static propTypes = {
+    vehicle: PropTypes.object.isRequired,
     removeEntry: PropTypes.func.isRequired,
     syncDatabase: PropTypes.func.isRequired,
     entries: PropTypes.array.isRequired,

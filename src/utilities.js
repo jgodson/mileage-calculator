@@ -63,4 +63,10 @@ function convertDate(entryDate) {
   return date.toLocaleDateString();
 }
 
-export {calculateMileage, labelNames, convertVolume, convertDistance, getImagePath, convertDate};
+function addIdToEntries({id, entries}) {
+  entries.forEach((entry) => {
+    entry.vehicleId = id;
+  });
+}
+
+export {calculateMileage, labelNames, convertVolume, convertDistance, getImagePath, convertDate, addIdToEntries};
